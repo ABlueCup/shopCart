@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <!-- <link rel="stylesheet/less" href="./css/shopCart.less">
+    <script src="./js/less-2.5.3.min.js"></script> -->
+    <link rel="stylesheet" href="./css/shopCart.css">
+</head>
+
+<body>
+    <div id="shopCart" v-cloak>
+        <template v-if="list.length">
+            <table>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" v-model="isAll" @change="getAll">全选</th>
+                        <th>商品名称</th>
+                        <th>商品价格</th>
+                        <th>购买数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item, index) in list">
+                        <td><input type="checkbox" v-model="item.checked" @change="checkEach"></td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.price}}</td>
+                        <td>
+                            {{item.count}}
+                        </td>
+                        <td>
+                            <button @click="handleReduce(index)" :disabled="item.count === 1">-</button>
+                            <button @click="handleAdd(index)">+</button>
+                            <button @click="handleRemove(index)">移除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>总价：￥{{totalPrice}}</div>
+        </template>
+        <div v-else>购物车为空</div>
+    </div>
+    <script src="./js/vue.js"></script>
+    <!-- <script src="../axios/node_modules/axios/dist/axios.js"></script> -->
+    <script src="./js/shopCart.js"></script>
+</body>
+
+</html>
